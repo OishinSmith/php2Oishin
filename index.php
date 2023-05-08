@@ -1,13 +1,22 @@
 <?php
+
+
 	
-require 'vendor/autoload.php';
+define('BASE', realpath(__DIR__ . '/../'));
 
-function autoload($className) {
-    $filename = __DIR__ . '/' . str_replace('\\', '/', $className) . '.php';
-    if (file_exists($filename)) {
-        require_once $filename;
+//require '../vendor/autoload.php';
+/**
+ * @todo: revise this
+ */
+spl_autoload_register(
+    function ($class) {
+        $file = str_replace('\\', '/', $class) . '.php';
+        require BASE . '/php2Oishin/src/' . $file;
     }
-}
+);
 
-// Register the autoloader funct	ion
-spl_autoload_register('autoload');	
+use Core\Customer\Customer;
+use Core\Rooms\Room;
+
+//$player = new Customer();
+$room = new Room(101, 101, 'closet', 1200);

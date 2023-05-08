@@ -11,7 +11,7 @@ Complete the following:
 
 namespace Core\Rooms;
 
-class AppartmentBlock{
+abstract class AppartmentBlock{
 
 	public function __construct(
 		protected int $number, 
@@ -19,11 +19,7 @@ class AppartmentBlock{
 		protected string $description, 
 		protected float $price) {}
     	
-	public function getNumber(){
-		return $this->number;
-	}
+	abstract public function getNumber() : int;
 	
-	public function getCapacity(){
-		return $this->capacity;
-	}
+	abstract public function getCapacity() : int;
 }

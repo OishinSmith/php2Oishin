@@ -22,25 +22,16 @@ class Room extends AppartmentBlock{
 			];
 	}
 	
+	public function getNumber() : int{
+		return $this->number;
+	}
 	
+	public function getCapacity() : int{
+		return $this->capacity;
+	}
 	
 	public function assignRoom($number){
 		$this->number = $number;
-	}
-}
-
-abstract class AppartmentBlock{
-
-	public function __construct(
-		protected int $number, 
-		protected int $capacity, 
-		protected string $description, 
-		protected float $price) {}
-    	
-	public function getNumber(){
-	}
-	
-	public function getCapacity(){
 	}
 }
 
