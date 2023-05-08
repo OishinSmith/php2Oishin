@@ -1,13 +1,26 @@
 <?php
+
+// lab 1
 /* Complete the following:
 1. Create a class definition that represents or models something. Give it a constant, some properties, and a few methods. Set appropriate visibilities for each.
 2. Instantiate a couple of objects, and execute the methods created producing some output.
 3. Create something which is realistic and appropriate to a current or future application for your domain.
 */
 
+//lab2
+/*
+Complete the following:
+1. Using the code from the previous exercises, add four magic methods, one of which is the magic constructor.
+2. The magic constructor should accepts parameters and set those parameters into the object on instantiation.
+3. Create an index.php file.
+4. Load, or autoload, the created classes.
+5. Instantiate object instances, and exercise the magic methods implemented.
+*/
+
+
 namespace BookingSystem\Customer;
 
-class Customer extends Room{
+class Customer{
 
 	private $name;
 	private $age;
@@ -16,8 +29,27 @@ class Customer extends Room{
 	public function __construct(string $name, int $age, ?int $appartmentNumber) {
 		$this->name = $name;
 		$this->age = $age;
-		$this->appartmentNumber = $appartmentNumber;
 	}
+	
+	public function __serialize(): array {
+		//Return array of serialized values
+		return [
+			'name' => $name,
+			'age' => $age
+		];
+	}
+	
+	public function __unserialize(array $data): void 
+	{
+		$this->name = $data["name"];
+		$this->age = $data['age'];
+	}
+	
+	public function __sleep(): array 
+	{
+		return ['name', 'age'];
+	}
+
 
 	// get the room that a guest is renting out
 	public function getAppartmentNumber(){
