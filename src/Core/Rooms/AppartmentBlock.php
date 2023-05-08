@@ -11,7 +11,7 @@ Complete the following:
 
 namespace Core\Rooms;
 
-class AppartmentBlock{
+class AppartmentBlock implements AppartmentBlockInterface{
 
 	public function __construct(
 		protected int $number, 
@@ -26,4 +26,12 @@ class AppartmentBlock{
 	public function getCapacity(){
 		return $this->capacity;
 	}
+	
+	public function calculateTotalPrice(): float {
+        	return $this->price + $this->price/100*12;
+    	}
+
+    	public function getAppartmentCapacity(): int {
+        	return $this->capacity;
+    	}
 }

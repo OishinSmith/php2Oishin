@@ -22,4 +22,6 @@ abstract class AppartmentBlock{
 	abstract public function getNumber() : int;
 	
 	abstract public function getCapacity() : int;
+	
+	abstract protected function assignRoom(): Room;
 }
