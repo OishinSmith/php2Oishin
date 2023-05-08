@@ -17,8 +17,7 @@ Complete the following:
 5. Instantiate object instances, and exercise the magic methods implemented.
 */
 
-
-namespace BookingSystem\Customer;
+namespace src\Core\Customer;
 
 class Customer{
 
@@ -49,7 +48,6 @@ class Customer{
 	{
 		return ['name', 'age'];
 	}
-
 
 	// get the room that a guest is renting out
 	public function getAppartmentNumber(){
