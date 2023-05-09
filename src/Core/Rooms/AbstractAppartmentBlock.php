@@ -11,26 +11,16 @@ Complete the following:
 
 namespace Core\Rooms;
 
-class AppartmentBlock extends AbstractAppartmentBlock implements AppartmentBlockInterface
+abstract class AbstractAppartmentBlock
 {
 
-	public function getNumber() : int 
-	{
-		return $this->number;
-	}
-	
-	public function getCapacity() : int
-	{
-		return $this->capacity;
-	}
-	
-	public function calculateTotalPrice(): float 
-	{
-		return $this->price + $this->price/100*12;
-	}
-
-	public function getAppartmentCapacity(): int 
-	{
-		return $this->capacity;
-	}
+	public function __construct(
+		protected int $number, 
+		protected int $capacity, 
+		protected string $description, 
+		protected float $price) {}
+    	
+	abstract public function getNumber() : int;	
+	abstract public function getCapacity() : int;
+	//abstract protected function assignRoom(): Room;
 }
