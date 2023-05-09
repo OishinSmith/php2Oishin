@@ -17,9 +17,10 @@ Complete the following:
 5. Instantiate object instances, and exercise the magic methods implemented.
 */
 
-namespace src\Core\Customer;
+namespace Core\Customer;
 
-class Customer{
+class Customer
+{
 
 	private $name;
 	private $age;
@@ -72,11 +73,3 @@ class Customer{
 	}
 }
 
-$user1 = new Customer("John Smith", 30, null);
-$user2 = new Customer("Joe Smith", 32, null);
-
-echo $user1->getAppartmentNumber() ? "User is in apartment {$user1->getApartmentNumber()}" : "User doesnt rent apartment\n";
-
-$user1->rentAppartment(101);
-
-var_dump($user1);
