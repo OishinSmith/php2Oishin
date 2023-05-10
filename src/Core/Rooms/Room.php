@@ -15,12 +15,16 @@ class Room extends AppartmentBlock
 		}
 		
 	public function getRoomDetails(){
-		return [
-			'number' => $number,
-			'capacity' => $capacity,
-			'description' => $description,
-			'price' => $price,
+		try{
+			return [
+				'number' => $number,
+				'capacity' => $capacity,
+				'description' => $description,
+				'price' => $price,
 			];
+		} catch(Exception $e) {
+			echo 'room doesnt have details';
+		}
 	}
 	
 	public function getNumber() : int{

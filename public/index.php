@@ -24,11 +24,14 @@ var_dump($room);
 
 echo '<br /><hr />';
 
-$user1 = new Customer("John Smith", 30, null);
-$user2 = new Customer("Joe Smith", 32, null);
+$rentee1 = new Customer("John Smith", 30, null);
+$rentee2 = new Customer("Joe Smith", 32, null);
 
-echo $user1->getAppartmentNumber() ? "User is in apartment {$user1->getApartmentNumber()}" : "User doesnt rent apartment\n";
+echo PHP_EOL;
+// echo $user1->getCustomerDetails() ? "User is in apartment {$user1->getApartmentNumber()}" : "User doesnt rent apartment\n\n";
+echo $rentee1->rentAppartment(101);
+echo '<br />';
+echo $rentee2->rentAppartment(102);
+echo '<br />';
+var_dump($rentee1->getCustomerDetails());
 
-$user1->rentAppartment(101);
-
-var_dump($user1);

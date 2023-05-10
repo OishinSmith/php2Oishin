@@ -19,13 +19,23 @@ Complete the following:
 
 namespace Core\Customer;
 
+use Core\Customer\Exceptions\MissingCustomerDetailsException;
+use Core\Customer\Traits\HumanCustomerTrait;
+use Core\Customer\Traits\GlibglobCustomerTrait;
+
 class Customer
 {
+	/*
+	use GlibglobCustomerTrait, HumanCustomerTrait {
+		GlibglobCustomerTrait::getType insteadof HumanCustomerTrait, 
+		HumanCustomerTrait::getType as getCustomerType;
+	}
+	*/
 
 	private $name;
 	private $age;
 	private $appartmentNumber;
-	
+
 	public function __construct(string $name, int $age, ?int $appartmentNumber) {
 		$this->name = $name;
 		$this->age = $age;
@@ -70,6 +80,17 @@ class Customer
 	public function checkIfAppartmentAvailable(int $appartmentNumber){
 		// check database if room is available
 		return true;
+	}
+	
+	public function getCustomerDetails(){
+		if (!$this->appartmentNumber || !$this->name || !$this->age){
+        		throw new MissingCustomerDetailsException();
+       	}
+       	return [
+       		'name' => $this->name,
+       		'age' => $this->age,
+       		'appartmentNumber' => $this->appartmentNumber
+       	];
 	}
 }
 
