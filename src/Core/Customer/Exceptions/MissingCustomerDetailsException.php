@@ -6,7 +6,7 @@ namespace Core\Rooms\Exceptions;
 
 use Exception;
 
-class MissingDetailsException extends Exception
+class MissingCustomerDetailsException extends Exception
 {
     public function __construct
     (
