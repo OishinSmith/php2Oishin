@@ -1,44 +1,45 @@
 <?php
 namespace Core\Db;
-use Exception;
+use PDO;
+use Throwable;
 
 final class Db
 {
-    private static $db;
-    public $pdo;
+    public $pdo = NULL;
 
     public function __construct()
     {    
     	// PREPARED STATEMENT to get value from DB
         try {
         	
-		$host = 'localhost';
-		$dbname = 'phpcourse';
-		$user = 'vagrant';
-		$password = 'vagrant';
+			$host = 'localhost';
+			$dbname = 'phpcourse';
+			$user = 'vagrant';
+			$password = 'vagrant';
+				
+			// Get the connection instance
+			$this->pdo = new PDO("mysql:host=$host;dbname=$dbname",$user,$password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 			
-		// Get the connection instance
-		$pdo = new PDO("mysql:host=$host;dbname=$dbname",$user,$password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-		
+		} catch (Throwable $t) {
+			
+			error_log($t->getMessage());
+			exit ('Can\'t Get There from Here');
+			
+		}
+	}
+	
+	public function demoInsert(string $first, string $last)
+	{
 		// Prepare an SQL statement to retrieve all customers
-		$stmt = $pdo->prepare("SELECT * FROM customers");
-		
-		// Hard coded input parameters
-		$name = 'Mark';
-		$age = 'Wallberg';
-		$appartmentNumber = 105;
+		$stmt = $this->pdo->prepare('INSERT INTO customers (firstname, lastname) VALUES (:first, :last);');
 		
 		// Execute the SQL statement
-		if ($stmt->execute([$fname, $lname])) {
-			echo "New customer $name is now renting $appartmentNumber";
-		}
+		$stmt->execute([':first' => $first, ':last' => $last]);
 		
-		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		$pdo = null;
-		foreach ($results as $row) {
-    			echo "Customer ID: {$row['id']}, Name: {$row['name']}, appartmentNumber: {$row['appartmentNumber']}<br>";
-		}
-		
+		return $stmt->rowCount();
+	}
+
+	/*
 	// TRANSACTION	
 	try {
 		$host = 'localhost';
@@ -92,4 +93,5 @@ final class Db
             echo "error, something went worong";
         }
     }
+    */
 }

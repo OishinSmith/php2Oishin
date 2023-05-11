@@ -12,6 +12,7 @@ spl_autoload_register(
     }
 );
 
+use Core\Db\Db;
 use Core\Rooms\Room;
 use Core\Customer\Customer;
 
@@ -34,4 +35,20 @@ echo '<br />';
 echo $rentee2->rentAppartment(102);
 echo '<br />';
 var_dump($rentee1->getCustomerDetails());
+
+echo '<h1>Database Demos</h1>';
+
+// Hard coded input parameters
+$first = $_GET['first'] ?? 'Mark';
+$last  = $_GET['last'] ?? 'Wallberg';
+$first = trim(strip_tags($first));
+$last  = trim(strip_tags($last));
+
+$db = new Db();
+if (!empty($db->demoInsert($first, $last))) {
+	echo "New customer $first $last is now renting";
+} else {
+	echo "New customer $first $last is NOT renting";
+}
+			
 
